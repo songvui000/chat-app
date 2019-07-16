@@ -21,6 +21,7 @@ module ChatApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.action_mailer.default_url_options = { host: 'localhost:3300' }
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -29,5 +30,16 @@ module ChatApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    #rack cors
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*', 'localhost:3000'
+        resource '*',
+                 headers: :any,
+                 expose: %w[access-token expiry token-type uid client],
+                 methods: %i[get post options delete put]
+      end
+    end
   end
 end

@@ -4,4 +4,7 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
 
   include DeviseTokenAuth::Concerns::User
+
+  has_many :members
+  has_many :rooms, through: :members
 end
