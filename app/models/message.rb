@@ -1,6 +1,7 @@
 class Message < ApplicationRecord
+  self.primary_key = 'guid'
   belongs_to :room
-  belongs_to :user
+  belongs_to :member
 
   validates :content, presence: true
   after_commit :boardcast_message
@@ -8,6 +9,6 @@ class Message < ApplicationRecord
   private
 
   def boardcast_message
-    ActionCable.server.broadcast 'chat_channel', message: content
+    ActionCable.server.broadcast "ChatRoom-#{room.code}", message: self.attributes.merge(code: room.code)
   end
 end
