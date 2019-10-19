@@ -32,9 +32,6 @@ gem 'jquery-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 gem 'rack-cors', :require => 'rack/cors'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -48,6 +45,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "capistrano", "~> 3.11", require: false
+  # Use Capistrano for deployment
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv', '~> 2.1'
 end
 
 group :development do
